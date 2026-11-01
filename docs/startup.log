@@ -1,0 +1,149 @@
+log: running initial setup
+log: setting rootBase to: ../
+log: setting appBase to: ../../
+log: setting storage mode to: MEMORY
+log: setting root fs storage mode to: MEMORY
+log: setting auto run to: true
+log: setting load Desktop to: false
+log: setting root zip file to: boxedwine.zip
+log: setting app zip file to: game.zip
+log: not setting cdrom ISO file
+log: setting program to execute to: Vascolet.exe
+log: setting registry preset gl to: reg add "HKCU\Software\Wine\Direct3D" /v DirectDrawRenderer /t REG_SZ /d opengl /f,reg add "HKCU\Software\Wine\Direct3D" /v renderer /t REG_SZ /d gl /f
+log: setting wine-override preset nomono to: mscoree,mshtml=
+log: setting sound to: true
+log: setting audioFreq to: 11025
+log: setting BPP to: 32
+log: setting skipFrameFPS to: 0
+log: setting Resolution to: 1024x768
+log: networking disabled
+log: Use Storage mode: MEMORY
+log: Use Root FS storage mode: MEMORY
+error: Failed to load resource: the server responded with a status of 404 (File not found)
+log: File created://game.zip
+log: File created://boxedwine.zip
+log: Emulator params:-root,/root/app/game.zip,-zip,boxedwine.zip,-mount,game.zip,/home/username/.wine/dosdevices/c:/files,-mount_drive,/d_drive/app/game.zip,d,-resolution,1024x768,-disableHideCursor,-env,WINEDLLOVERRIDES=mscoree,mshtml=,-w,/home/username/.wine/dosdevices/c:/files,/bin/wine,cmd,/c,reg,add,HKCU\Software\Wine\Direct3D,/v,DirectDrawRenderer,/t,REG_SZ,/d,opengl,/f,&&,reg,add,HKCU\Software\Wine\Direct3D,/v,renderer,/t,REG_SZ,/d,gl,/f,&&,Vascolet.exe
+log: Starting ...
+log: Command line arguments: "./boxedwine" "-root" "/root/app/game.zip" "-zip" "boxedwine.zip" "-mount" "game.zip" "/home/username/.wine/dosdevices/c:/files" "-mount_drive" "/d_drive/app/game.zip" "d" "-resolution" "1024x768" "-disableHideCursor" "-env" "WINEDLLOVERRIDES=mscoree,mshtml=" "-w" "/home/username/.wine/dosdevices/c:/files" "/bin/wine" "cmd" "/c" "reg" "add" "HKCU\Software\Wine\Direct3D" "/v" "DirectDrawRenderer" "/t" "REG_SZ" "/d" "opengl" "/f" "&&" "reg" "add" "HKCU\Software\Wine\Direct3D" "/v" "renderer" "/t" "REG_SZ" "/d" "gl" "/f" "&&" "Vascolet.exe"
+log: BoxedWine build timestamp: Nov  1 2026 12:20:59
+log: Using root directory: /root/app/game.zip
+log: Using zip file system: boxedwine.zip
+log: Resolution set to: 1024x768
+log: Loaded boxedwine.zip in 89 ms
+log: Mounted game.zip in 11 ms
+log: Launching "/bin/wine" "cmd" "/c" "reg" "add" "HKCU\Software\Wine\Direct3D" "/v" "DirectDrawRenderer" "/t" "REG_SZ" "/d" "opengl" "/f" "&&" "reg" "add" "HKCU\Software\Wine\Direct3D" "/v" "renderer" "/t" "REG_SZ" "/d" "gl" "/f" "&&" "Vascolet.exe" 
+log: [WASM JIT] first JIT block executed, tableIdx: 13523
+log: [WASM JIT batching] compiledBlocks=1000 browserModules=167 functionsPerGroup=14.1 mapped=882 anonymous=118 rawBytes=11586436 mergedBytes=5184560 flushes[count=1 bytes=3 urgent=54 processCap=0] groups[live=58 created=58 released=0] cancelled=13 failed=0 tiny[deferred=10 promoted=1] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=2000 browserModules=268 functionsPerGroup=11.4 mapped=1880 anonymous=120 rawBytes=22744417 mergedBytes=14478004 flushes[count=2 bytes=11 urgent=144 processCap=0] groups[live=157 created=157 released=0] cancelled=21 failed=0 tiny[deferred=10 promoted=1] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=3000 browserModules=376 functionsPerGroup=10.4 mapped=2877 anonymous=123 rawBytes=40542393 mergedBytes=29440228 flushes[count=2 bytes=29 urgent=231 processCap=0] groups[live=262 created=262 released=0] cancelled=65 failed=0 tiny[deferred=10 promoted=1] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=4000 browserModules=484 functionsPerGroup=9.9 mapped=3876 anonymous=124 rawBytes=53231627 mergedBytes=40274405 flushes[count=2 bytes=38 urgent=329 processCap=0] groups[live=369 created=369 released=0] cancelled=65 failed=0 tiny[deferred=10 promoted=1] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=5000 browserModules=570 functionsPerGroup=10.1 mapped=4876 anonymous=124 rawBytes=63040423 mergedBytes=47901125 flushes[count=3 bytes=42 urgent=410 processCap=0] groups[live=455 created=455 released=0] cancelled=73 failed=0 tiny[deferred=10 promoted=1] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=6000 browserModules=679 functionsPerGroup=9.9 mapped=5875 anonymous=125 rawBytes=76694956 mergedBytes=59477691 flushes[count=3 bytes=52 urgent=508 processCap=0] groups[live=562 created=563 released=1] cancelled=90 failed=0 tiny[deferred=10 promoted=1] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [MIPS] count=10 raw=51 avg=100 min=2 max=407 warmAvg=100 warmSamples=0
+log: [WASM JIT batching] compiledBlocks=7000 browserModules=753 functionsPerGroup=10.3 mapped=6875 anonymous=125 rawBytes=82507033 mergedBytes=63964511 flushes[count=4 bytes=53 urgent=580 processCap=0] groups[live=636 created=637 released=1] cancelled=90 failed=0 tiny[deferred=10 promoted=1] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=8000 browserModules=839 functionsPerGroup=10.4 mapped=7873 anonymous=127 rawBytes=92577306 mergedBytes=72654284 flushes[count=4 bytes=61 urgent=656 processCap=0] groups[live=720 created=721 released=1] cancelled=90 failed=0 tiny[deferred=10 promoted=1] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=9000 browserModules=927 functionsPerGroup=10.4 mapped=8873 anonymous=127 rawBytes=105178806 mergedBytes=82919968 flushes[count=5 bytes=73 urgent=731 processCap=0] groups[live=808 created=809 released=1] cancelled=98 failed=0 tiny[deferred=10 promoted=1] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=10000 browserModules=1021 functionsPerGroup=10.5 mapped=9872 anonymous=128 rawBytes=119309020 mergedBytes=94739831 flushes[count=6 bytes=84 urgent=812 processCap=0] groups[live=901 created=902 released=1] cancelled=106 failed=0 tiny[deferred=10 promoted=1] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=11000 browserModules=1095 functionsPerGroup=10.6 mapped=10872 anonymous=128 rawBytes=130842697 mergedBytes=104438371 flushes[count=7 bytes=93 urgent=876 processCap=0] groups[live=975 created=976 released=1] cancelled=106 failed=0 tiny[deferred=10 promoted=1] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=12000 browserModules=1166 functionsPerGroup=10.8 mapped=11872 anonymous=128 rawBytes=136081556 mergedBytes=108696986 flushes[count=8 bytes=94 urgent=945 processCap=0] groups[live=1046 created=1047 released=1] cancelled=106 failed=0 tiny[deferred=10 promoted=1] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: 00a8:err:ntoskrnl:ZwLoadDriver failed to create driver L"\\Registry\\Machine\\System\\CurrentControlSet\\Services\\winebth": c00000e5
+log: 003c:fixme:service:scmdatabase_autostart_services Auto-start service L"winebth" failed to start: 1359
+log: [WASM JIT batching] compiledBlocks=13000 browserModules=1239 functionsPerGroup=11.0 mapped=12872 anonymous=128 rawBytes=144824950 mergedBytes=115909074 flushes[count=10 bytes=98 urgent=1012 processCap=0] groups[live=1119 created=1120 released=1] cancelled=106 failed=0 tiny[deferred=10 promoted=1] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=14000 browserModules=1306 functionsPerGroup=11.2 mapped=13872 anonymous=128 rawBytes=149918619 mergedBytes=120037760 flushes[count=11 bytes=99 urgent=1077 processCap=0] groups[live=1186 created=1187 released=1] cancelled=106 failed=0 tiny[deferred=10 promoted=1] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=15000 browserModules=1419 functionsPerGroup=11.1 mapped=14843 anonymous=157 rawBytes=158227913 mergedBytes=125892026 flushes[count=11 bytes=100 urgent=1167 processCap=0] groups[live=1277 created=1278 released=1] cancelled=252 failed=0 tiny[deferred=17 promoted=1] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [MIPS] count=20 raw=40 avg=85 min=2 max=407 warmAvg=40 warmSamples=1
+log: [WASM JIT batching] compiledBlocks=16000 browserModules=1576 functionsPerGroup=10.8 mapped=15801 anonymous=199 rawBytes=171658284 mergedBytes=136242454 flushes[count=11 bytes=112 urgent=1266 processCap=0] groups[live=1388 created=1389 released=1] cancelled=260 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=17000 browserModules=1647 functionsPerGroup=11.0 mapped=16801 anonymous=199 rawBytes=179605956 mergedBytes=142359879 flushes[count=12 bytes=119 urgent=1329 processCap=0] groups[live=1459 created=1460 released=1] cancelled=260 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=18000 browserModules=1731 functionsPerGroup=11.0 mapped=17801 anonymous=199 rawBytes=184526918 mergedBytes=146947790 flushes[count=13 bytes=119 urgent=1412 processCap=0] groups[live=1543 created=1544 released=1] cancelled=260 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=19000 browserModules=1835 functionsPerGroup=11.0 mapped=18789 anonymous=211 rawBytes=196103238 mergedBytes=156381628 flushes[count=13 bytes=126 urgent=1497 processCap=0] groups[live=1635 created=1636 released=1] cancelled=260 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=20000 browserModules=1927 functionsPerGroup=11.0 mapped=19789 anonymous=211 rawBytes=203703397 mergedBytes=162367591 flushes[count=13 bytes=128 urgent=1587 processCap=0] groups[live=1727 created=1728 released=1] cancelled=268 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=21000 browserModules=2016 functionsPerGroup=11.0 mapped=20787 anonymous=213 rawBytes=211330020 mergedBytes=168814131 flushes[count=14 bytes=132 urgent=1669 processCap=0] groups[live=1814 created=1815 released=1] cancelled=268 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=22000 browserModules=2127 functionsPerGroup=10.8 mapped=21787 anonymous=213 rawBytes=224086998 mergedBytes=179501734 flushes[count=14 bytes=142 urgent=1770 processCap=0] groups[live=1925 created=1926 released=1] cancelled=276 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=23000 browserModules=2196 functionsPerGroup=11.0 mapped=22787 anonymous=213 rawBytes=229035064 mergedBytes=182835070 flushes[count=15 bytes=142 urgent=1838 processCap=0] groups[live=1993 created=1995 released=2] cancelled=276 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [?25lreg: The operation completed successfully
+
+log: [WASM JIT batching] compiledBlocks=24000 browserModules=2312 functionsPerGroup=10.8 mapped=23785 anonymous=215 rawBytes=241725567 mergedBytes=193529643 flushes[count=15 bytes=151 urgent=1943 processCap=0] groups[live=2107 created=2109 released=2] cancelled=378 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=25000 browserModules=2384 functionsPerGroup=10.9 mapped=24785 anonymous=215 rawBytes=246793601 mergedBytes=197304789 flushes[count=16 bytes=152 urgent=2013 processCap=0] groups[live=2179 created=2181 released=2] cancelled=378 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [?25h[?25lreg: The operation completed successfully
+
+log: [WASM JIT batching] compiledBlocks=26000 browserModules=2491 functionsPerGroup=10.8 mapped=25784 anonymous=216 rawBytes=259099810 mergedBytes=206737328 flushes[count=16 bytes=159 urgent=2112 processCap=0] groups[live=2285 created=2287 released=2] cancelled=480 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [?25h[MIPS] count=30 raw=41 avg=72 min=32 max=114 warmAvg=71 warmSamples=11
+log: [WASM JIT batching] compiledBlocks=27000 browserModules=2561 functionsPerGroup=10.8 mapped=26784 anonymous=216 rawBytes=268667798 mergedBytes=214730170 flushes[count=16 bytes=166 urgent=2175 processCap=0] groups[live=2355 created=2357 released=2] cancelled=480 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=28000 browserModules=2639 functionsPerGroup=10.9 mapped=27784 anonymous=216 rawBytes=274865897 mergedBytes=219499202 flushes[count=17 bytes=167 urgent=2251 processCap=0] groups[live=2431 created=2435 released=4] cancelled=480 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: BoxedWine WebGL WineD3D build timestamp: Jan 13 2026 15:56:07
+log: 00fc:err:winediag:wined3d_dll_init BoxedWine WebGL WineD3D loaded as wined3d.dll.
+log: [WASM JIT batching] compiledBlocks=29000 browserModules=2759 functionsPerGroup=10.8 mapped=28782 anonymous=218 rawBytes=289073293 mergedBytes=231912639 flushes[count=17 bytes=181 urgent=2355 processCap=0] groups[live=2549 created=2553 released=4] cancelled=488 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=30000 browserModules=2827 functionsPerGroup=10.9 mapped=29782 anonymous=218 rawBytes=293956335 mergedBytes=235832142 flushes[count=18 bytes=181 urgent=2422 processCap=0] groups[live=2617 created=2621 released=4] cancelled=488 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: Showing Window
+log: ran main loop in 115ms
+log: 0104:err:vulkan:vulkan_init_once Wine was built without Vulkan support.
+log: [WASM JIT batching] compiledBlocks=31000 browserModules=2921 functionsPerGroup=10.9 mapped=30782 anonymous=218 rawBytes=302433411 mergedBytes=242936124 flushes[count=20 bytes=183 urgent=2512 processCap=0] groups[live=2711 created=2715 released=4] cancelled=488 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: WASM JIT simd enabled
+log: [WASM JIT batching] compiledBlocks=32000 browserModules=3000 functionsPerGroup=10.9 mapped=31782 anonymous=218 rawBytes=312347314 mergedBytes=251289869 flushes[count=20 bytes=192 urgent=2582 processCap=0] groups[live=2790 created=2794 released=4] cancelled=488 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [MIPS] count=40 raw=32 avg=103 min=24 max=506 warmAvg=100 warmSamples=21
+log: [WASM JIT batching] compiledBlocks=33000 browserModules=3101 functionsPerGroup=10.8 mapped=32781 anonymous=219 rawBytes=324914854 mergedBytes=261244696 flushes[count=20 bytes=201 urgent=2673 processCap=0] groups[live=2890 created=2894 released=4] cancelled=496 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=34000 browserModules=3191 functionsPerGroup=10.9 mapped=33781 anonymous=219 rawBytes=335682418 mergedBytes=270718581 flushes[count=20 bytes=211 urgent=2753 processCap=0] groups[live=2980 created=2984 released=4] cancelled=496 failed=0 tiny[deferred=18 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: 00fc:err:winediag:wined3d_dll_init Using the OpenGL renderer.
+log: 00fc:err:winediag:wined3d_dll_init Using the WebGL-compatible profile.
+log: 00fc:err:winediag:wined3d_dll_init Using GLSL ES output for the WebGL-compatible profile.
+log: [WASM JIT batching] compiledBlocks=35000 browserModules=3443 functionsPerGroup=10.8 mapped=34611 anonymous=389 rawBytes=351068771 mergedBytes=283166039 flushes[count=20 bytes=231 urgent=2819 processCap=0] groups[live=3066 created=3070 released=4] cancelled=496 failed=0 tiny[deferred=22 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: 00fc:err:vulkan:vulkan_init_once Wine was built without Vulkan support.
+log: ran main loop in 157ms
+warning: [.WebGL-0x340c26b31800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+warning: [.WebGL-0x340c26b31800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+log: 00fc:err:d3d:wined3d_adapter_find_polyoffset_scale PolygonOffset scale factor detection failed, using fallback value 2^23.
+log: 00fc:err:d3d:wined3d_adapter_find_polyoffset_scale PolygonOffset scale factor detection failed, using fallback value 2^23.
+log: 00fc:err:d3d:wined3d_adapter_find_polyoffset_scale PolygonOffset scale factor detection failed, using fallback value 2^23.
+log: 00fc:err:d3d:wined3d_adapter_find_polyoffset_scale PolygonOffset scale factor detection failed, using fallback value 2^23.
+log: 00fc:err:d3d:wined3d_adapter_find_polyoffset_scale PolygonOffset scale factor detection failed, using fallback value 2^23.
+log: [WASM JIT batching] compiledBlocks=36000 browserModules=3552 functionsPerGroup=10.8 mapped=35609 anonymous=391 rawBytes=362117299 mergedBytes=293608363 flushes[count=20 bytes=243 urgent=2915 processCap=0] groups[live=3174 created=3178 released=4] cancelled=496 failed=0 tiny[deferred=23 promoted=6] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: 014c:fixme:avrt:AvSetMmThreadCharacteristicsW (L"Audio",7BB18988): stub
+log: [MIPS] count=50 raw=529 avg=138 min=24 max=529 warmAvg=114 warmSamples=31
+log: [WASM JIT batching] compiledBlocks=37000 browserModules=4135 functionsPerGroup=10.8 mapped=36046 anonymous=954 rawBytes=372620100 mergedBytes=296485738 flushes[count=21 bytes=244 urgent=2946 processCap=0] groups[live=3207 created=3211 released=4] cancelled=496 failed=0 tiny[deferred=54 promoted=24] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT batching] compiledBlocks=38000 browserModules=4269 functionsPerGroup=10.9 mapped=36966 anonymous=1034 rawBytes=382569197 mergedBytes=302706561 flushes[count=22 bytes=248 urgent=3000 processCap=0] groups[live=3266 created=3270 released=4] cancelled=496 failed=0 tiny[deferred=61 promoted=26] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [WASM JIT] freshCompiled=1000 latestSlot=49701 tableLen=49702
+log: [WASM JIT batching] compiledBlocks=39000 browserModules=4395 functionsPerGroup=11.0 mapped=37891 anonymous=1109 rawBytes=396326778 mergedBytes=314104983 flushes[count=23 bytes=267 urgent=3029 processCap=0] groups[live=3315 created=3319 released=4] cancelled=496 failed=0 tiny[deferred=67 promoted=34] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: [MIPS] count=60 raw=139 avg=233 min=30 max=601 warmAvg=165 warmSamples=41
+log: [WASM JIT batching] compiledBlocks=40000 browserModules=4504 functionsPerGroup=11.2 mapped=38810 anonymous=1190 rawBytes=407412851 mergedBytes=321985070 flushes[count=25 bytes=276 urgent=3055 processCap=0] groups[live=3352 created=3356 released=4] cancelled=496 failed=0 tiny[deferred=77 promoted=35] oom[pauses=0 blocked=0 retries=0 resumptions=0]
+log: ran main loop in 111ms
+log: [MIPS] count=70 raw=130 avg=259 min=43 max=601 warmAvg=171 warmSamples=51
+GUEST OUTPUT:
+Starting ...
+Command line arguments: "./boxedwine" "-root" "/root/app/game.zip" "-zip" "boxedwine.zip" "-mount" "game.zip" "/home/username/.wine/dosdevices/c:/files" "-mount_drive" "/d_drive/app/game.zip" "d" "-resolution" "1024x768" "-disableHideCursor" "-env" "WINEDLLOVERRIDES=mscoree,mshtml=" "-w" "/home/username/.wine/dosdevices/c:/files" "/bin/wine" "cmd" "/c" "reg" "add" "HKCU\Software\Wine\Direct3D" "/v" "DirectDrawRenderer" "/t" "REG_SZ" "/d" "opengl" "/f" "&&" "reg" "add" "HKCU\Software\Wine\Direct3D" "/v" "renderer" "/t" "REG_SZ" "/d" "gl" "/f" "&&" "Vascolet.exe"
+BoxedWine build timestamp: Nov  1 2026 12:20:59
+Using root directory: /root/app/game.zip
+Using zip file system: boxedwine.zip
+Resolution set to: 1024x768
+Loaded boxedwine.zip in 89 ms
+Mounted game.zip in 11 ms
+Launching "/bin/wine" "cmd" "/c" "reg" "add" "HKCU\Software\Wine\Direct3D" "/v" "DirectDrawRenderer" "/t" "REG_SZ" "/d" "opengl" "/f" "&&" "reg" "add" "HKCU\Software\Wine\Direct3D" "/v" "renderer" "/t" "REG_SZ" "/d" "gl" "/f" "&&" "Vascolet.exe" 
+[WASM JIT] first JIT block executed, tableIdx: 13523
+[MIPS] count=10 raw=51 avg=100 min=2 max=407 warmAvg=100 warmSamples=0
+00a8:err:ntoskrnl:ZwLoadDriver failed to create driver L"\\Registry\\Machine\\System\\CurrentControlSet\\Services\\winebth": c00000e5
+003c:fixme:service:scmdatabase_autostart_services Auto-start service L"winebth" failed to start: 1359
+[MIPS] count=20 raw=40 avg=85 min=2 max=407 warmAvg=40 warmSamples=1
+[?25lreg: The operation completed successfully
+[?25h[?25lreg: The operation completed successfully
+[?25h[MIPS] count=30 raw=41 avg=72 min=32 max=114 warmAvg=71 warmSamples=11
+BoxedWine WebGL WineD3D build timestamp: Jan 13 2026 15:56:07
+00fc:err:winediag:wined3d_dll_init BoxedWine WebGL WineD3D loaded as wined3d.dll.
+Showing Window
+ran main loop in 115ms
+0104:err:vulkan:vulkan_init_once Wine was built without Vulkan support.
+WASM JIT simd enabled
+[MIPS] count=40 raw=32 avg=103 min=24 max=506 warmAvg=100 warmSamples=21
+00fc:err:winediag:wined3d_dll_init Using the OpenGL renderer.
+00fc:err:winediag:wined3d_dll_init Using the WebGL-compatible profile.
+00fc:err:winediag:wined3d_dll_init Using GLSL ES output for the WebGL-compatible profile.
+00fc:err:vulkan:vulkan_init_once Wine was built without Vulkan support.
+ran main loop in 157ms
+00fc:err:d3d:wined3d_adapter_find_polyoffset_scale PolygonOffset scale factor detection failed, using fallback value 2^23.
+00fc:err:d3d:wined3d_adapter_find_polyoffset_scale PolygonOffset scale factor detection failed, using fallback value 2^23.
+00fc:err:d3d:wined3d_adapter_find_polyoffset_scale PolygonOffset scale factor detection failed, using fallback value 2^23.
+00fc:err:d3d:wined3d_adapter_find_polyoffset_scale PolygonOffset scale factor detection failed, using fallback value 2^23.
+00fc:err:d3d:wined3d_adapter_find_polyoffset_scale PolygonOffset scale factor detection failed, using fallback value 2^23.
+014c:fixme:avrt:AvSetMmThreadCharacteristicsW (L"Audio",7BB18988): stub
+[MIPS] count=50 raw=529 avg=138 min=24 max=529 warmAvg=114 warmSamples=31
+[MIPS] count=60 raw=139 avg=233 min=30 max=601 warmAvg=165 warmSamples=41
+ran main loop in 111ms
+[MIPS] count=70 raw=130 avg=259 min=43 max=601 warmAvg=171 warmSamples=51
