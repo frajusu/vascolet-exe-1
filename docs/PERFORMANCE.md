@@ -1,3 +1,9 @@
+# Actualización: nueva vía XO con CheerpX
+
+Vascolet 1 ya tiene otra implementación de ejecución original: ver
+[mediciones de CheerpX dentro del nivel](CHEERPX.md). La investigación y los
+números siguientes corresponden a la versión anterior basada en Wine.
+
 # Rendimiento e investigación
 
 ## Implementación publicada

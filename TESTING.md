@@ -1,12 +1,7 @@
-# Pruebas
+# Pruebas actuales
 
-La versión actual se probó en Chromium con WebGL por software, modo multihilo
-aislado, teclado y ratón. Los cuatro ejecutables superan el inicio y responden.
-Ver [investigación y mediciones](docs/PERFORMANCE.md) para los límites.
+[CheerpX: benchmark de movimiento, audio y copias de partida](docs/CHEERPX.md).
 
-![Interfaz actual](docs/v2-cold.png)
+![Nivel original en la interfaz publicada](docs/cheerpx-gameplay.png)
 
-![Después de enviar entradas](docs/v2-cold-input.png)
-
-Las capturas antiguas `startup.png` y `startup.log` documentan la primera
-versión, anterior al cambio de interfaz. No describen el rendimiento actual.
+Los registros `startup.*` y `v2-*` corresponden a versiones anteriores con Wine.

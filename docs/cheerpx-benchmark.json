@@ -1,0 +1,15 @@
+{
+  "cold": "XO \u00b7 CheerpX \u00b7 arranque 6.0 s",
+  "warm": "XO \u00b7 CheerpX \u00b7 arranque 2.3 s",
+  "fps": 57.85689485761068,
+  "medianMs": 17.0,
+  "p95Ms": 23.765000000596046,
+  "audio": {
+    "state": "running",
+    "starts": 10,
+    "rms": 0.11484358582174857,
+    "errors": []
+  },
+  "saveExportImport": true,
+  "errors": []
+}

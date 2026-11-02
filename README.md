@@ -2,14 +2,20 @@
 
 [Abrir juego](https://frajusu.github.io/vascolet-exe-1/)
 
-El EXE original y sus recursos corren en Boxedwine + Wine 11 / WebAssembly.
+La opción recomendada ejecuta **el programa original de XO con CheerpX**, con
+dispositivos SDL conectados al navegador. También se conserva el EXE de Windows
+con Boxedwine + Wine 11 como alternativa.
 La pantalla está dedicada al juego, como los ports `-web`. Las opciones están
 en el botón ☰. Los botones 1–4 cambian de Vascolet.
 
 ## Motores y carga
 
-- JIT multihilo con SharedArrayBuffer y OffscreenCanvas, por defecto cuando el
-  navegador permite aislamiento de origen. Un service worker agrega COOP/COEP
+- **XO · CheerpX (experimental):** seleccionado por Automático cuando el navegador
+  permite aislamiento. Prueba local dentro de La Prehistoria con movimiento:
+  aproximadamente **58 FPS**, audio activo y arranque de 4–6 s / unos 2,3 s en local.
+  Ver [método, evidencia y alcance](docs/CHEERPX.md).
+- JIT multihilo de Wine con SharedArrayBuffer y OffscreenCanvas.
+  Un service worker agrega COOP/COEP
   en GitHub Pages; requiere una recarga automática en la primera visita.
 - JIT de un hilo como alternativa y fallback si falla la inicialización del
   multihilo. El menú permite seleccionar cualquiera.
@@ -23,7 +29,7 @@ Ver [mediciones e investigación](docs/PERFORMANCE.md).
 
 ## Partidas
 
-Los archivos escritos por el juego se conservan mediante IDBFS / IndexedDB,
+Los archivos escritos por el juego se conservan en IndexedDB,
 con una clave distinta para cada Vascolet. `localStorage` guarda solamente las
 preferencias: motor y sonido. IndexedDB evita el límite pequeño de localStorage
 y permite guardar los archivos binarios originales.
@@ -31,7 +37,7 @@ y permite guardar los archivos binarios originales.
 Se sincroniza al cambiar de juego, al reiniciar, al ocultar la pestaña y
 periódicamente. El menú permite exportar e importar una copia JSON de los
 archivos modificados de este entorno, no un estado instantáneo de la RAM.
-El juego debe guardar primero su propio progreso. Borrar los datos del sitio
+XO y Wine mantienen partidas separadas. El juego debe guardar primero su propio progreso. Borrar los datos del sitio
 o usar otra sesión de navegador no conserva esas partidas.
 
 ## Desarrollo y publicación
@@ -42,8 +48,9 @@ python -m http.server 8000 --directory dist
 ```
 
 Python 3.11+, Internet para el primer build. Chrome/Edge o Firefox actualizado
-en PC. La primera visita carga aproximadamente 130–156 MB; las siguientes usan
-la caché local. El modo JIT de esta compilación no soporta Safari.
+en PC. La opción XO carga su paquete y CheerpX; no descarga Wine para jugar.
+La alternativa Windows carga aproximadamente 130 MB la primera vez. Las
+siguientes visitas usan la caché local. Se ha validado CheerpX en Chromium.
 
 Actions genera `dist/` y publica GitHub Pages. Las descargas se verifican con
 los hashes de `runtime.lock.json`. El pin Wine upstream contiene `latest`:
