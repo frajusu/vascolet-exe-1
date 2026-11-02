@@ -49,8 +49,23 @@ Los datos XO viven en IndexedDB, en un espacio distinto del de Wine. El ejecutab
 original guarda bajo `SUGAR_ACTIVITY_ROOT`. La copia JSON lleva un campo `engine`
 para impedir que se importe accidentalmente en el motor de otra plataforma.
 
-Por ahora esta integración se habilita solamente en Vascolet 1. Los otros tres
-juegos requieren pruebas específicas; no se extrapolan estos resultados.
+La integración también está habilitada en Vascolet 2–4. Cada repositorio
+documenta sus propias mediciones; no se extrapolan estos resultados.
+
+## Correcciones de noviembre de 2026
+
+- Eventos SDL de 20 bytes, según la ABI i386, sin sobrescribir variables del juego.
+- Invalidación de texturas al cambiar transparencia, modificar superficies o
+  liberar memoria; identificadores de texturas tratados como enteros sin signo.
+- Color key comparado sobre los canales RGB; el canal alfa sólo se usa cuando
+  SDL_SRCALPHA está activo. Se respeta la precedencia del alfa por píxel.
+- Recorte de blits y tratamiento de escrituras parciales del transporte.
+- 104 comprobaciones de transparencias y reutilización de texturas aprobadas.
+- Nueva prueba dentro de La Prehistoria: 58,03 FPS, mediana 16,92 ms, p95 24,14 ms;
+  audio, reinicio e importación/exportación de archivos comprobados.
+
+Estas comprobaciones cubren los errores corregidos y la ruta probada; no
+certifican todavía todas las pantallas o un teléfono concreto.
 
 ## Archivos y reproducción
 

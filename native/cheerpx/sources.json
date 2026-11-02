@@ -7,7 +7,7 @@
   "compiler": "Zig 0.13.0, x86-linux-gnu.2.17 -shared -fPIC -O2; native-init x86-linux-musl -static -Os",
   "files": {
     "lib/ld-linux.so.2": "9cc99c379376d7ab686179c21a7609f4a53a56cc51dc653b133642451827eb56",
-    "lib/libSDL-1.2.so.0": "9c5af2ad35319bdab6ee19374c73264b9570864f9dfc6cd1ce937aaa1a30b473",
+    "lib/libSDL-1.2.so.0": "414d9c6a4b98edd73f73ffd866a155ad54f11f166daf2828624a5fd7c0dccc69",
     "lib/libNAT-1.2.so.0": "a879b131b1597538c49034ae6b654310236fa38b6d8af4339b637b1d6493c243",
     "lib/libSDL_mixer-1.2.so.0": "811827309ccbfbbdb5ce8229a7b91a28e5246178768e44dc403f4b8b962462f2",
     "lib/libSDL_image-1.2.so.0": "d9e5dc1cd7cfefa810a64bc176d8223074ad167b8791f4452a937a0391db25c3",
@@ -23,11 +23,11 @@
     "lib/libpng.so.3": "6d70b92ce21395abd646dd0a30fe14b06a4697ab3ae5eada328e57b617366d73",
     "bin/native-init": "0130364d1e9a0baadf53d62314fd463ada8009f678370c1916e90b4921aa2478",
     "app/Vascolet": "1309bfe746d52208e86183f279d33a166854e73245c809b283ef0b9dfa123485",
-    "bin/index.html": "f182870f864e70294d1689d2568618a2b18e2d52f4c2e445a23f8308f2493cc5",
     "app/index.html": "f182870f864e70294d1689d2568618a2b18e2d52f4c2e445a23f8308f2493cc5",
+    "bin/index.html": "f182870f864e70294d1689d2568618a2b18e2d52f4c2e445a23f8308f2493cc5",
     "lib/index.html": "f182870f864e70294d1689d2568618a2b18e2d52f4c2e445a23f8308f2493cc5",
-    "bin/index.list": "a7a63f36d941da28e5b6def05769ef908e05e63bee7c12cc862b4f30b14fb718",
     "app/index.list": "d22c0f97f3e4d4fb43afbc99652de505ff8c34a007165c1b904cb5096a0c61e5",
+    "bin/index.list": "a7a63f36d941da28e5b6def05769ef908e05e63bee7c12cc862b4f30b14fb718",
     "lib/index.list": "86f5c5bceb31b66f86543e5984fde1e244693fc63f3b95b8981363f6c8c2e1ef"
   }
 }
