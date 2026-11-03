@@ -67,6 +67,28 @@ documenta sus propias mediciones; no se extrapolan estos resultados.
 Estas comprobaciones cubren los errores corregidos y la ruta probada; no
 certifican todavía todas las pantallas o un teléfono concreto.
 
+### Menos memoria y trabajo de audio/transporte
+
+Los sonidos ahora se descargan y decodifican al usarse, con una caché compartida
+por URL y un objetivo de 32 MiB de buffers decodificados inactivos. Los buffers
+en reproducción no se expulsan. Un sonido individual activo puede superar
+ese objetivo; no es un límite absoluto de memoria del navegador.
+
+En una comparación controlada al entrar a La Prehistoria, la versión anterior
+decodificó dos buffers para el mismo recurso (28.800.000 bytes); la nueva
+decodificó uno (14.400.000 bytes). La caché reutiliza ese buffer para efectos
+que se repiten. Si una descarga o decodificación falla, se libera el canal del
+juego en vez de dejarlo marcado como ocupado. Los nodos terminados se desconectan.
+
+El transporte gráfico usa un buffer reutilizable que crece geométricamente,
+en lugar de asignar y copiar todos los bytes pendientes en cada fragmento.
+La prueba de un paquete fragmentado de 2 MiB sólo requirió cinco ampliaciones.
+También se eliminó una asignación temporal por cada blit de sprites.
+
+Pruebas posteriores: movimiento y salto a 58,01 FPS en PC, audio real sin errores,
+importación/exportación y controles multitáctiles. **Todavía no se comprobó la
+mejora de tirones o cortes de audio en el teléfono del usuario.**
+
 ## Archivos y reproducción
 
 - `site/cheerpx/bundle.zip`: bibliotecas, ELF original, assets y adaptadores.
