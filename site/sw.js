@@ -1,5 +1,5 @@
 'use strict';
-const CACHE = 'vascolet-exe-runtime-v4-xo1';
+const CACHE = 'vascolet-exe-runtime-v6-xo1-aot-versioned';
 self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
 self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));
 function isolated(response) {
@@ -8,11 +8,15 @@ function isolated(response) {
   headers.set('Cross-Origin-Opener-Policy','same-origin');
   headers.set('Cross-Origin-Embedder-Policy','require-corp');
   headers.set('Cross-Origin-Resource-Policy','same-origin');
+  if(!response.url.includes('/cheerpx/fs-'))headers.set('Cache-Control','no-cache');
   return new Response(response.body,{status:response.status,statusText:response.statusText,headers});
 }
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   if (event.request.method !== 'GET' || url.origin !== self.location.origin) return;
+  if(url.pathname.includes('/aot/')||url.pathname.endsWith('/game.json')||url.pathname.endsWith('/launcher.js')){
+    event.respondWith(fetch(new Request(event.request,{cache:'no-store'})).then(isolated));return;
+  }
   const native=url.pathname.includes('/cheerpx/fs-');
   const requestedRange=event.request.headers.get('Range');
   if(requestedRange&&!native)return;

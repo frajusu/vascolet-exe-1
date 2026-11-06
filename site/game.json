@@ -3,5 +3,7 @@
   "exe": "Vascolet.exe",
   "zipBytes": 26802750,
   "wineBytes": 99512877,
-  "xoEngine": true
+  "xoEngine": true,
+  "aotEngine": true,
+  "aotVersion": "2026-11-03-465518c55e1b"
 }
