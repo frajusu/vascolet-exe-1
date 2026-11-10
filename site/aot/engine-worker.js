@@ -26,9 +26,12 @@ function saveIfRequested(){
 }
 function installSaveHooks(){
   const home=path=>typeof path==='string'&&path.startsWith(gameHome+'/');
-  const close=mod.FS.close.bind(mod.FS);mod.FS.close=stream=>{const changed=home(stream.path)&&(stream.flags&3)!==0;const result=close(stream);if(changed)rpc('persist',[saveFiles()]);return result;};
-  const rename=mod.FS.rename.bind(mod.FS);mod.FS.rename=(from,to)=>{const result=rename(from,to);if(home(from)||home(to))rpc('persist',[saveFiles()]);return result;};
-  const unlink=mod.FS.unlink.bind(mod.FS);mod.FS.unlink=path=>{const result=unlink(path);if(home(path))rpc('persist',[saveFiles()]);return result;};
+  /* A storage failure (quota, private mode, blocked DB) must never crash the
+   * guest mid-fclose: warn and keep playing. */
+  const persist=()=>{try{rpc('persist',[saveFiles()]);}catch(error){postMessage({type:'log',line:'Aviso de guardado: '+error});}};
+  const close=mod.FS.close.bind(mod.FS);mod.FS.close=stream=>{const changed=home(stream.path)&&(stream.flags&3)!==0;const result=close(stream);if(changed)persist();return result;};
+  const rename=mod.FS.rename.bind(mod.FS);mod.FS.rename=(from,to)=>{const result=rename(from,to);if(home(from)||home(to))persist();return result;};
+  const unlink=mod.FS.unlink.bind(mod.FS);mod.FS.unlink=path=>{const result=unlink(path);if(home(path))persist();return result;};
 }
 function eventQueue(){
   const held=new Set(),pending=[];let buttons=0,peek=null;
