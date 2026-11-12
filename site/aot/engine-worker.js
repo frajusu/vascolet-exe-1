@@ -56,10 +56,12 @@ function renderer(){
          * passes on the phone). One memcpy wasm->SAB; the main thread draws straight
          * from shared memory.
          * Double-buffered: slot (id&1) is only overwritten after main acked frame
-         * id-2 (the previous user of this slot), so the main thread's putImageData
-         * overlaps the next frame's guest work instead of serializing with it. */
+         * id-1 (previous user of this slot was id-2, so ack id-1 suffices). Guest
+         * work of frame id overlaps main's putImageData of id-1, but the 4 MiB
+         * memcpy never runs concurrently with it: concurrent full-frame copies
+         * saturate phone memory bandwidth (cost us fps). */
         const id=++frameID,stride=framePixels.length>>1,off=(id&1)*stride;
-        if(id>2)waitForAtLeast(P.FRAME_ACK,id-2,20);
+        if(id>1)waitForAtLeast(P.FRAME_ACK,id-1,20);
         framePixels.set(heap.subarray(ptr,ptr+bytes),off);
         stats.frames++;stats.wasmBytes=heap.buffer.byteLength;stats.workerHeapBytes=performance.memory?performance.memory.usedJSHeapSize:-1;
         postMessage({type:'frame',id,off,slot:id&1,w,h,stats:{...stats}});
