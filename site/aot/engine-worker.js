@@ -39,13 +39,16 @@ function installSaveHooks(){
 }
 function eventQueue(){
   const held=new Set(),pending=[];let buttons=0,peek=null;
-  function recover(){if(!Atomics.exchange(control,P.INPUT_OVERFLOW,0))return;Atomics.store(control,P.INPUT_READ,Atomics.load(control,P.INPUT_WRITE));for(const code of held){const e=new Uint8Array(20);e[0]=3;new DataView(e.buffer).setInt32(8,code,true);pending.push(e);}for(let button=1;button<=5;button++)if(buttons&(1<<(button-1))){const e=new Uint8Array(20);e[0]=6;e[2]=button;pending.push(e);}}
+  function recover(){if(!Atomics.load(control,P.INPUT_OVERFLOW))return;if(!Atomics.exchange(control,P.INPUT_OVERFLOW,0))return;Atomics.store(control,P.INPUT_READ,Atomics.load(control,P.INPUT_WRITE));for(const code of held){const e=new Uint8Array(20);e[0]=3;new DataView(e.buffer).setInt32(8,code,true);pending.push(e);}for(let button=1;button<=5;button++)if(buttons&(1<<(button-1))){const e=new Uint8Array(20);e[0]=6;e[2]=button;pending.push(e);}}
   function next(){saveIfRequested();if(peek)return peek.event;recover();if(pending.length){peek={event:pending[0],local:true};return peek.event;}const read=Atomics.load(control,P.INPUT_READ),write=Atomics.load(control,P.INPUT_WRITE);if(read===write)return undefined;const offset=(read%P.QUEUE)*20;peek={event:input.slice(offset,offset+20),read,local:false};return peek.event;}
   return {get 0(){return next();},shift(){const event=next();if(!event)return undefined;if(peek.local)pending.shift();else Atomics.store(control,P.INPUT_READ,peek.read+1);peek=null;const code=new DataView(event.buffer).getInt32(8,true);if(event[0]===2)held.add(code);else if(event[0]===3)held.delete(code);else if(event[0]===5)buttons|=1<<(event[2]-1);else if(event[0]===6)buttons&=~(1<<(event[2]-1));stats.events++;return event;}};
 }
 function finishedQueue(){return {get length(){return Atomics.load(control,P.AUDIO_WRITE)-Atomics.load(control,P.AUDIO_READ);},set length(value){if(value!==0)throw Error('Invalid audio queue reset');Atomics.store(control,P.AUDIO_READ,Atomics.load(control,P.AUDIO_WRITE));},shift(){const read=Atomics.load(control,P.AUDIO_READ);if(read===Atomics.load(control,P.AUDIO_WRITE))return undefined;const value=audio[read%P.QUEUE];Atomics.store(control,P.AUDIO_READ,read+1);return value;}};}
 function renderer(){
   const canvas=new OffscreenCanvas(512,384),context=canvas.getContext('2d',{alpha:false}),source=new OffscreenCanvas(1,1),ctx=source.getContext('2d',{alpha:false});let image;
+  /* postMessage structured-clones synchronously, so one reusable frame message
+   * (with the live stats object) skips a fresh object+copy per frame. */
+  const frameMsg={type:'frame',stats};
   return {resize(w,h){canvas.width=w;canvas.height=h;postMessage({type:'resize',w,h});},present(heap,ptr,w,h,pitch,kind,dw,dh){
     if(stopped())throw Error('Prueba detenida');
     if(kind===4){/* wasm pre-converted rgb565->RGBA: zero-copy view, no JS pixel loop */
@@ -64,7 +67,7 @@ function renderer(){
         if(id>1)waitForAtLeast(P.FRAME_ACK,id-1,20);
         framePixels.set(heap.subarray(ptr,ptr+bytes),off);
         stats.frames++;stats.wasmBytes=heap.buffer.byteLength;stats.workerHeapBytes=performance.memory?performance.memory.usedJSHeapSize:-1;
-        postMessage({type:'frame',id,off,slot:id&1,w,h,stats:{...stats}});
+        frameMsg.id=id;frameMsg.off=off;frameMsg.slot=id&1;frameMsg.w=w;frameMsg.h=h;postMessage(frameMsg);
         mod._renew_entry_budget();
         return;
       }

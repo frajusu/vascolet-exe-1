@@ -7,7 +7,7 @@ let worker=null,wire=null,serial=0,importedSave=null,watchdog=null,lastStats={},
 const saveWaiters=new Map();
 function requestSave(){if(!worker)return Promise.reject(Error('El juego no está iniciado.'));const request=Atomics.add(wire.c,P.SAVE_REQUEST,1)+1;return new Promise((resolve,reject)=>{const timer=setTimeout(()=>{saveWaiters.delete(request);reject(Error('El guardado tardó demasiado.'));},15000);saveWaiters.set(request,{resolve,reject,timer});});}
 function settleSave(request,save,error){for(const [id,item] of saveWaiters)if(id<=request){clearTimeout(item.timer);saveWaiters.delete(id);error?item.reject(error):item.resolve(save);}}
-const say=text=>{status.textContent=text;dispatchEvent(new CustomEvent('vascolet-status',{detail:text}));};
+const say=text=>{if(status.textContent===text)return;status.textContent=text;dispatchEvent(new CustomEvent('vascolet-status',{detail:text}));};
 function log(text){lines.push(String(text));if(lines.length>120)lines.shift();logBox.textContent=lines.join('\n');dispatchEvent(new CustomEvent('vascolet-log',{detail:String(text)}));}
 function normalize(path){const parts=[];for(const p of path.split('/')){if(!p||p==='.')continue;if(p==='..')parts.pop();else parts.push(p);}if(parts[0]==='game')parts.shift();return parts.join('/');}
 function createWire(){const control=new SharedArrayBuffer(128),input=new SharedArrayBuffer(P.QUEUE*20),audio=new SharedArrayBuffer(P.QUEUE*4),pixels=new SharedArrayBuffer(P.PIXEL_BYTES),frame=new SharedArrayBuffer(P.PIXEL_BYTES);return {control,input,audio,pixels,frame,c:new Int32Array(control),events:new Uint8Array(input),ended:new Int32Array(audio),bytes:new Uint8Array(pixels),framePixels:new Uint8Array(frame),number:new DataView(control)};}
