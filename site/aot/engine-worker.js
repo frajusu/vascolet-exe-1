@@ -10,6 +10,7 @@ const stats={frames:0,images:0,imageBytesCopied:0,events:0,wasmBytes:0,lastTitle
 const rgb565LUT=(()=>{const t=new Uint32Array(65536);for(let v=0;v<65536;v++){const r=(v>>8&248)|(v>>13&7),g=(v>>3&252)|(v>>9&3),b=(v<<3&248)|(v>>2&7);t[v]=(255<<24)|(b<<16)|(g<<8)|r;}return t;})();
 function stopped(){return Atomics.load(control,P.STOP)!==0;}
 function waitFor(index,value,seconds=20){const until=performance.now()+seconds*1000;while(Atomics.load(control,index)!==value){if(stopped())throw Error('Prueba detenida');if(performance.now()>until)throw Error('El navegador no respondió dentro del límite');const old=Atomics.load(control,index);if(old!==value)Atomics.wait(control,index,old,250);}}
+function waitForAtLeast(index,value,seconds=20){const until=performance.now()+seconds*1000;while(Atomics.load(control,index)<value){if(stopped())throw Error('Prueba detenida');if(performance.now()>until)throw Error('El navegador no respondió dentro del límite');Atomics.wait(control,index,Atomics.load(control,index),250);}}
 function rpc(method,args=[],raw){
   const id=++rpcID;postMessage({type:'rpc',id,method,args,raw},raw?[raw.buffer]:[]);waitFor(P.RPC_DONE,id);
   if(Atomics.load(control,P.RPC_ERROR)){const n=Atomics.load(control,P.ERROR_LENGTH);throw Error(decoder.decode(sharedPixels.subarray(0,Math.min(n,P.ERROR_BYTES))));}
@@ -49,17 +50,20 @@ function renderer(){
     if(stopped())throw Error('Prueba detenida');
     if(kind===4){/* wasm pre-converted rgb565->RGBA: zero-copy view, no JS pixel loop */
       const bytes=w*h*4;
-      if(framePixels&&dw===w&&dh===h&&canvas.width===w&&canvas.height===h){
+      if(framePixels&&dw===w&&dh===h&&canvas.width===w&&canvas.height===h&&bytes*2<=framePixels.length){
         /* Identity present: skip the OffscreenCanvas round trip entirely
          * (putImageData + drawImage + getImageData readback + copy cost ~4 full-frame
          * passes on the phone). One memcpy wasm->SAB; the main thread draws straight
-         * from shared memory. */
-        if(bytes>framePixels.length)throw Error('El frame supera el límite de memoria compartida');
-        framePixels.set(heap.subarray(ptr,ptr+bytes));
+         * from shared memory.
+         * Double-buffered: slot (id&1) is only overwritten after main acked frame
+         * id-2 (the previous user of this slot), so the main thread's putImageData
+         * overlaps the next frame's guest work instead of serializing with it. */
+        const id=++frameID,stride=framePixels.length>>1,off=(id&1)*stride;
+        if(id>2)waitForAtLeast(P.FRAME_ACK,id-2,20);
+        framePixels.set(heap.subarray(ptr,ptr+bytes),off);
         stats.frames++;stats.wasmBytes=heap.buffer.byteLength;stats.workerHeapBytes=performance.memory?performance.memory.usedJSHeapSize:-1;
-        const id=++frameID;
-        postMessage({type:'frame',id,w,h,stats:{...stats}});
-        waitFor(P.FRAME_ACK,id,20);mod._renew_entry_budget();
+        postMessage({type:'frame',id,off,slot:id&1,w,h,stats:{...stats}});
+        mod._renew_entry_budget();
         return;
       }
       if(source.width!==w||source.height!==h){source.width=w;source.height=h;}
