@@ -51,6 +51,7 @@ function renderer(){
   const frameMsg={type:'frame',stats};
   return {resize(w,h){canvas.width=w;canvas.height=h;postMessage({type:'resize',w,h});},present(heap,ptr,w,h,pitch,kind,dw,dh){
     if(stopped())throw Error('Prueba detenida');
+    const t0=performance.now();
     saveIfRequested();
     if(kind===4){/* wasm pre-converted rgb565->RGBA: zero-copy view, no JS pixel loop */
       const bytes=w*h*4;
@@ -65,10 +66,13 @@ function renderer(){
          * memcpy never runs concurrently with it: concurrent full-frame copies
          * saturate phone memory bandwidth (cost us fps). */
         const id=++frameID,stride=framePixels.length>>1,off=(id&1)*stride;
+        const wait0=performance.now();
         if(id>1)waitForAtLeast(P.FRAME_ACK,id-1,20);
+        stats.ackMs=(stats.ackMs||0)+(performance.now()-wait0);
         framePixels.set(heap.subarray(ptr,ptr+bytes),off);
         stats.frames++;stats.wasmBytes=heap.buffer.byteLength;stats.workerHeapBytes=performance.memory?performance.memory.usedJSHeapSize:-1;
         frameMsg.id=id;frameMsg.off=off;frameMsg.slot=id&1;frameMsg.w=w;frameMsg.h=h;postMessage(frameMsg);
+        stats.presentMs=(stats.presentMs||0)+(performance.now()-t0);
         mod._renew_entry_budget();
         return;
       }
