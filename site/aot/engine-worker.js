@@ -48,8 +48,22 @@ function renderer(){
   return {resize(w,h){canvas.width=w;canvas.height=h;postMessage({type:'resize',w,h});},present(heap,ptr,w,h,pitch,kind,dw,dh){
     if(stopped())throw Error('Prueba detenida');
     if(kind===4){/* wasm pre-converted rgb565->RGBA: zero-copy view, no JS pixel loop */
+      const bytes=w*h*4;
+      if(framePixels&&dw===w&&dh===h&&canvas.width===w&&canvas.height===h){
+        /* Identity present: skip the OffscreenCanvas round trip entirely
+         * (putImageData + drawImage + getImageData readback + copy cost ~4 full-frame
+         * passes on the phone). One memcpy wasm->SAB; the main thread draws straight
+         * from shared memory. */
+        if(bytes>framePixels.length)throw Error('El frame supera el límite de memoria compartida');
+        framePixels.set(heap.subarray(ptr,ptr+bytes));
+        stats.frames++;stats.wasmBytes=heap.buffer.byteLength;stats.workerHeapBytes=performance.memory?performance.memory.usedJSHeapSize:-1;
+        const id=++frameID;
+        postMessage({type:'frame',id,w,h,stats:{...stats}});
+        waitFor(P.FRAME_ACK,id,20);mod._renew_entry_budget();
+        return;
+      }
       if(source.width!==w||source.height!==h){source.width=w;source.height=h;}
-      ctx.putImageData(new ImageData(new Uint8ClampedArray(heap.buffer,ptr,w*h*4),w),0,0);
+      ctx.putImageData(new ImageData(new Uint8ClampedArray(heap.buffer,ptr,bytes),w),0,0);
     }else{
     if(!image||source.width!==w||source.height!==h){source.width=w;source.height=h;image=ctx.createImageData(w,h);}const out=image.data;
     if(kind===1){for(let y=0;y<h;y++){let row=ptr+y*pitch,at=y*w*4;for(let x=0;x<w;x+=2){const u=heap[row+1]-128,v=heap[row+3]-128,c0=(heap[row]-16)*298,c1=(heap[row+2]-16)*298;out[at]=(c0+409*v+128)>>8;out[at+1]=(c0-100*u-208*v+128)>>8;out[at+2]=(c0+516*u+128)>>8;out[at+3]=255;out[at+4]=(c1+409*v+128)>>8;out[at+5]=(c1-100*u-208*v+128)>>8;out[at+6]=(c1+516*u+128)>>8;out[at+7]=255;row+=4;at+=8;}}}
