@@ -4,7 +4,7 @@ const GAME_NUMBER=Number(globalThis.VASCOLET_GAME_NUMBER||2);
 const status=document.getElementById('status'),start=document.getElementById('start'),stop=document.getElementById('stop'),logBox=document.getElementById('log');
 const backend=createAOTBrowserHost(canvas),rawSounds=new Map(),durations=new Map(),pendingAudio=new Map();
 let worker=null,wire=null,serial=0,importedSave=null,watchdog=null,lastStats={},lastReport=null,lines=[],saveCount=0,frameSeen=0,bitmapClosed=0,imageRpcClosed=0,frameImages=[null,null];
-let drawMs=0;
+let drawMs=0,lastFrameAt=0,hitchCount=0,hitchMaxMs=0;
 const saveWaiters=new Map();
 function requestSave(){if(!worker)return Promise.reject(Error('El juego no está iniciado.'));const request=Atomics.add(wire.c,P.SAVE_REQUEST,1)+1;return new Promise((resolve,reject)=>{const timer=setTimeout(()=>{saveWaiters.delete(request);reject(Error('El guardado tardó demasiado.'));},15000);saveWaiters.set(request,{resolve,reject,timer});});}
 function settleSave(request,save,error){for(const [id,item] of saveWaiters)if(id<=request){clearTimeout(item.timer);saveWaiters.delete(id);error?item.reject(error):item.resolve(save);}}
@@ -66,6 +66,8 @@ start.onclick=async()=>{
       if(data.type==='frame'){
         frameSeen++;
         const draw0=performance.now();
+        if(lastFrameAt){const gap=draw0-lastFrameAt;if(gap>150)hitchCount++;if(gap>hitchMaxMs)hitchMaxMs=gap;}
+        lastFrameAt=draw0;
         try{
           if(data.bitmap){ /* legacy worker: per-frame ImageBitmap */
             if(canvas.width!==data.bitmap.width||canvas.height!==data.bitmap.height)backend.resize(data.bitmap.width,data.bitmap.height);
@@ -86,7 +88,7 @@ start.onclick=async()=>{
             if(!fi.shared)fi.img.data.set(wire.framePixels.subarray(off,off+bytes));
             context.putImageData(fi.img,0,0);
           }
-          drawMs+=performance.now()-draw0;data.stats.drawMs=drawMs;
+          drawMs+=performance.now()-draw0;data.stats.drawMs=drawMs;data.stats.hitchCount=hitchCount;data.stats.hitchMaxMs=hitchMaxMs;
           lastStats=data.stats;if(data.id===1)dispatchEvent(new CustomEvent('vascolet-ready'));say('Juego en pantalla · clic para enfocar · Enter para continuar');
         }
         finally{if(data.bitmap){data.bitmap.close();bitmapClosed++;}Atomics.store(wire.c,P.FRAME_ACK,data.id);Atomics.notify(wire.c,P.FRAME_ACK);}return;
